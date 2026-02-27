@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>APL IMAGE — Customer Information</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=DM+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a href="../00-landing-page/index.html" class="top-logo">APL IMAGE</a>
+      <div class="top-right">
+        <!-- Language switcher -->
+        <div class="lang-switcher">
+          <button class="lang-btn" onclick="toggleLangDropdown()">
+            <span id="langLabel">EN</span>
+            <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          </button>
+          <div class="lang-dropdown" id="langDropdown">
+            <button onclick="setLang('en')" data-lang="en">English</button>
+            <button onclick="setLang('ko')" data-lang="ko">Korean</button>
+            <button onclick="setLang('ja')" data-lang="ja">Japanese</button>
+            <button onclick="setLang('zh')" data-lang="zh">Chinese</button>
+          </div>
+        </div>
+        <!-- Theme toggle -->
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span class="theme-icon" id="icon-dark">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+          <span class="theme-icon" id="icon-light">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-container">
+
+    <!-- ========== INPUT PAGE ========== -->
+    <div id="inputPage">
+
+      <!-- Header -->
+      <header class="page-header">
+        <h1 class="page-title">APL IMAGE</h1>
+        <p class="page-subtitle" data-i18n="ci_subtitle">Customer Information</p>
+      </header>
+
+      <!-- Privacy Consent -->
+      <section class="privacy-notice">
+        <h2 data-i18n="ci_privacy_title">Privacy Policy & Consent</h2>
+        <div class="privacy-content">
+          <p><strong data-i18n="ci_privacy_1_title">1. Personal Information Collected</strong></p>
+          <p data-i18n="ci_privacy_1_body">Name, gender, contact info, email, body measurements (height, weight, clothing size), face and body photos/videos</p>
+          <br>
+          <p><strong data-i18n="ci_privacy_2_title">2. Purpose of Collection</strong></p>
+          <p data-i18n="ci_privacy_2_body">Providing remote personal color/body type diagnosis service and customized diagnosis results</p>
+          <br>
+          <p><strong data-i18n="ci_privacy_3_title">3. Retention Period</strong></p>
+          <p data-i18n="ci_privacy_3_body">Data will be retained for 1 year from service completion date and destroyed immediately thereafter.</p>
+          <br>
+          <p><strong data-i18n="ci_privacy_4_title">4. Right to Refuse</strong></p>
+          <p data-i18n="ci_privacy_4_body">You have the right to refuse consent. However, without consent, the remote diagnosis service may be limited.</p>
+        </div>
+        <div class="privacy-consent">
+          <input type="checkbox" id="privacyConsent" required>
+          <label for="privacyConsent" data-i18n="ci_privacy_agree">I agree to the collection and use of personal information. (Required)</label>
+        </div>
+      </section>
+
+      <!-- Input Form -->
+      <form id="customerForm">
+
+        <!-- 1. Name -->
+        <div class="form-group">
+          <label for="customerName" class="required" data-i18n="ci_field_name">1. Name</label>
+          <input type="text" id="customerName" required data-i18n-placeholder="ci_field_name_ph" placeholder="Enter your name">
+        </div>
+
+        <!-- 2. Gender -->
+        <div class="form-group">
+          <label class="required" data-i18n="ci_field_gender">2. Gender</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="gender" value="female" required>
+              <span data-i18n="ci_gender_female">Female</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender" value="male">
+              <span data-i18n="ci_gender_male">Male</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 3. Age -->
+        <div class="form-group">
+          <label for="age" class="required" data-i18n="ci_field_age">3. Age</label>
+          <input type="number" id="age" required min="1" max="150" data-i18n-placeholder="ci_field_age_ph" placeholder="Enter your age">
+        </div>
+
+        <!-- 4. Phone -->
+        <div class="form-group">
+          <label class="required" data-i18n="ci_field_phone">4. Phone</label>
+          <!-- Korean format (010-XXXX-XXXX) -->
+          <div class="phone-input-container" id="phoneKorean">
+            <input type="text" value="010" disabled class="phone-prefix">
+            <span class="phone-separator">-</span>
+            <input type="tel" id="phone2" maxlength="4" pattern="[0-9]{4}" class="phone-number" placeholder="0000">
+            <span class="phone-separator">-</span>
+            <input type="tel" id="phone3" maxlength="4" pattern="[0-9]{4}" class="phone-number" placeholder="0000">
+          </div>
+          <!-- International format (country code + number) -->
+          <div class="phone-intl-container" id="phoneIntl" style="display: none;">
+            <div class="phone-intl-row">
+              <select id="phoneCountryCode" class="phone-country-select">
+                <option value="+1">+1 (US/CA)</option>
+                <option value="+44">+44 (UK)</option>
+                <option value="+81">+81 (JP)</option>
+                <option value="+86">+86 (CN)</option>
+                <option value="+82">+82 (KR)</option>
+                <option value="+61">+61 (AU)</option>
+                <option value="+49">+49 (DE)</option>
+                <option value="+33">+33 (FR)</option>
+                <option value="+65">+65 (SG)</option>
+                <option value="+852">+852 (HK)</option>
+                <option value="+886">+886 (TW)</option>
+                <option value="+91">+91 (IN)</option>
+                <option value="+62">+62 (ID)</option>
+                <option value="+66">+66 (TH)</option>
+                <option value="+84">+84 (VN)</option>
+                <option value="+63">+63 (PH)</option>
+              </select>
+              <input type="tel" id="phoneIntlNumber" class="phone-intl-input" data-i18n-placeholder="ci_phone_intl_ph" placeholder="Phone number">
+            </div>
+          </div>
+          <p class="help-text highlight" id="phoneHintKo" data-i18n="ci_phone_hint">Diagnosis results will be sent to this number via KakaoTalk.</p>
+          <p class="help-text highlight" id="phoneHintIntl" style="display: none;" data-i18n="ci_phone_hint_intl">We may contact you regarding your diagnosis results.</p>
+        </div>
+
+        <!-- 5. Email -->
+        <div class="form-group" id="emailGroup">
+          <label for="email" id="emailLabel" data-i18n="ci_field_email">5. Email (Optional)</label>
+          <input type="email" id="email" placeholder="example@email.com">
+          <p class="help-text" id="emailRequiredHint" style="display: none;" data-i18n="ci_email_required_hint">Email is required for international customers to receive diagnosis results.</p>
+        </div>
+
+        <!-- 6. Occupation -->
+        <div class="form-group">
+          <label for="occupation" data-i18n="ci_field_occupation">6. Occupation (Optional)</label>
+          <input type="text" id="occupation" data-i18n-placeholder="ci_field_occupation_ph" placeholder="e.g. Service industry, Sales">
+          <p class="help-text" data-i18n="ci_occupation_hint">More specific descriptions enable more detailed work-related styling recommendations.</p>
+        </div>
+
+        <!-- 7. Body Measurements -->
+        <div class="form-group">
+          <label class="required" data-i18n="ci_field_body">7. Body Measurements</label>
+          <div class="size-inputs">
+            <div class="size-row">
+              <span class="size-label" data-i18n="ci_body_height">Height</span>
+              <input type="number" id="height" required placeholder="cm">
+              <span class="size-unit">cm</span>
+            </div>
+            <div class="size-row">
+              <span class="size-label" data-i18n="ci_body_weight">Weight</span>
+              <input type="number" id="weight" required placeholder="kg">
+              <span class="size-unit">kg</span>
+            </div>
+            <div class="size-row">
+              <span class="size-label" data-i18n="ci_body_clothing">Clothing</span>
+              <input type="text" id="clothingSize" required data-i18n-placeholder="ci_body_clothing_ph" placeholder="e.g. 55, M, 95">
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Reason for Diagnosis -->
+        <div class="form-group">
+          <label for="reason" class="required" data-i18n="ci_field_reason">8. Reason for Diagnosis</label>
+          <textarea id="reason" rows="3" required data-i18n-placeholder="ci_field_reason_ph" placeholder="You can write briefly"></textarea>
+        </div>
+
+        <!-- 9. Style Preference -->
+        <div class="form-group">
+          <label for="stylePreference" class="required" data-i18n="ci_field_style">9. Style Preference</label>
+          <textarea id="stylePreference" rows="3" required data-i18n-placeholder="ci_field_style_ph" placeholder="Describe your preferred fashion, hair, makeup style"></textarea>
+        </div>
+
+        <!-- 10. Face Photo Upload -->
+        <div class="form-group">
+          <label class="required" data-i18n="ci_field_face_photo">10. Face Photo Upload</label>
+          <p class="help-text highlight" data-i18n="ci_face_photo_hint">Please upload face photos from multiple angles for accurate diagnosis.</p>
+
+          <!-- Face Photos -->
+          <div class="upload-section upload-card" id="facePhotosCard">
+            <div class="card-header-row">
+              <h4 class="upload-section-title" data-i18n="ci_face_photos_title">a. Face Photos (Front, 45°, Side)</h4>
+              <span class="badge badge-required" data-i18n="ci_badge_required">Required</span>
+            </div>
+            <div class="upload-area" id="faceUploadArea">
+              <div class="upload-placeholder" id="facePlaceholder">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/><path d="M32 20V44M20 32H44" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <p class="upload-text" data-i18n="ci_upload_click">Click to upload photos</p>
+                <p class="upload-hint" data-i18n="ci_upload_face_hint">Add front, 45°, and side photos</p>
+              </div>
+              <div class="face-preview-summary" id="facePreviewSummary" style="display: none;">
+                <div class="preview-thumbnails" id="faceThumbnails"></div>
+                <button type="button" class="btn-edit" id="editFacePhotosBtn">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.5 2L14 4.5L5 13.5L2 14L2.5 11L11.5 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span data-i18n="ci_btn_edit">Edit</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Face Video -->
+          <div class="upload-section">
+            <h4 class="upload-section-title" data-i18n="ci_face_video_title">b. Face Video (Optional)</h4>
+            <p class="help-text" data-i18n="ci_face_video_hint">A short video showing your face from various angles (max 50MB)</p>
+            <div class="upload-area" id="faceVideoUploadArea" onclick="openFaceVideoGuide()">
+              <div class="upload-placeholder">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/><path d="M32 20V44M20 32H44" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <p class="upload-text" data-i18n="ci_upload_video_click">Click for video guide & upload</p>
+                <p class="upload-hint" data-i18n="ci_upload_video_hint">See the guide video for reference</p>
+              </div>
+              <div class="video-preview-container" id="faceVideoPreview" style="display: none;">
+                <button type="button" class="btn-edit" onclick="event.stopPropagation(); openFaceVideoGuide()">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.5 2L14 4.5L5 13.5L2 14L2.5 11L11.5 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span data-i18n="ci_btn_edit">Edit</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Makeup References -->
+          <div class="upload-section">
+            <h4 class="upload-section-title" data-i18n="ci_makeup_title">c. Usual Makeup Style (Optional, max 2)</h4>
+            <div class="upload-row single">
+              <div class="upload-item wide">
+                <div class="preview-container multi" id="makeupPreview"></div>
+                <div class="upload-btn-wrapper">
+                  <button type="button" class="upload-btn" data-i18n="ci_btn_select_photo">Select Photos</button>
+                  <input type="file" id="makeupImages" accept="image/*" multiple onchange="handleMultiImageUpload(this, 'makeup', 2)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Body Photo Upload -->
+        <div class="form-group">
+          <label class="required" data-i18n="ci_field_body_photo">11. Body Photo Upload</label>
+          <p class="help-text highlight" data-i18n="ci_body_photo_hint">Please upload full-body photos from multiple angles for body type diagnosis.</p>
+
+          <!-- Body Photos -->
+          <div class="upload-section upload-card" id="bodyPhotosCard">
+            <div class="card-header-row">
+              <h4 class="upload-section-title" data-i18n="ci_body_photos_title">a. Body Photos (Front, 45°, Side)</h4>
+              <span class="badge badge-required" data-i18n="ci_badge_required">Required</span>
+            </div>
+            <div class="upload-area" id="bodyUploadArea">
+              <div class="upload-placeholder" id="bodyPlaceholder">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/><path d="M32 20V44M20 32H44" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <p class="upload-text" data-i18n="ci_upload_click">Click to upload photos</p>
+                <p class="upload-hint" data-i18n="ci_upload_body_hint">Add front, 45°, and side photos</p>
+              </div>
+              <div class="body-preview-summary" id="bodyPreviewSummary" style="display: none;">
+                <div class="preview-thumbnails" id="bodyThumbnails"></div>
+                <button type="button" class="btn-edit" id="editBodyPhotosBtn">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.5 2L14 4.5L5 13.5L2 14L2.5 11L11.5 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span data-i18n="ci_btn_edit">Edit</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Body Video -->
+          <div class="upload-section">
+            <h4 class="upload-section-title" data-i18n="ci_body_video_title">b. Body Video (Optional)</h4>
+            <p class="help-text" data-i18n="ci_body_video_hint">A short video showing your body from various angles (max 50MB)</p>
+            <div class="upload-area" id="bodyVideoUploadArea" onclick="openBodyVideoGuide()">
+              <div class="upload-placeholder">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/><path d="M32 20V44M20 32H44" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <p class="upload-text" data-i18n="ci_upload_video_click">Click for video guide & upload</p>
+                <p class="upload-hint" data-i18n="ci_upload_video_hint">See the guide video for reference</p>
+              </div>
+              <div class="video-preview-container" id="bodyVideoPreview" style="display: none;">
+                <button type="button" class="btn-edit" onclick="event.stopPropagation(); openBodyVideoGuide()">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.5 2L14 4.5L5 13.5L2 14L2.5 11L11.5 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span data-i18n="ci_btn_edit">Edit</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fashion References -->
+          <div class="upload-section">
+            <h4 class="upload-section-title" data-i18n="ci_fashion_title">c. Usual Fashion Style (Optional, max 2)</h4>
+            <div class="upload-row single">
+              <div class="upload-item wide">
+                <div class="preview-container multi" id="fashionPreview"></div>
+                <div class="upload-btn-wrapper">
+                  <button type="button" class="upload-btn" data-i18n="ci_btn_select_photo">Select Photos</button>
+                  <input type="file" id="fashionImages" accept="image/*" multiple onchange="handleMultiImageUpload(this, 'fashion', 2)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="button" class="submit-btn" onclick="goToConfirmPage()" data-i18n="ci_btn_next">Next</button>
+
+      </form>
+    </div>
+
+    <!-- ========== CONFIRM PAGE ========== -->
+    <div id="confirmPage" style="display: none;">
+      <header class="page-header">
+        <h1 class="page-title">APL IMAGE</h1>
+        <p class="page-subtitle" data-i18n="ci_confirm_subtitle">Review Your Information</p>
+      </header>
+
+      <div class="confirm-welcome">
+        <span id="confirmName"></span><span data-i18n="ci_confirm_greeting">,</span><br>
+        <span data-i18n="ci_confirm_check">Please review the information below.</span>
+      </div>
+      <p class="confirm-sub-text" data-i18n="ci_confirm_instruction">Please confirm and click Complete.</p>
+
+      <div class="confirm-content">
+        <div class="confirm-section">
+          <h3 data-i18n="ci_confirm_basic">Basic Information</h3>
+          <div class="confirm-item">
+            <span class="confirm-label" data-i18n="ci_confirm_name">Name</span>
+            <span class="confirm-value" id="confirmNameValue"></span>
+          </div>
+          <div class="confirm-item">
+            <span class="confirm-label" data-i18n="ci_confirm_gender">Gender</span>
+            <span class="confirm-value" id="confirmGender"></span>
+          </div>
+          <div class="confirm-item">
+            <span class="confirm-label" data-i18n="ci_confirm_age">Age</span>
+            <span class="confirm-value" id="confirmAge"></span>
+          </div>
+          <div class="confirm-item">
+            <span class="confirm-label" data-i18n="ci_confirm_phone">Phone</span>
+            <span class="confirm-value" id="confirmPhone"></span>
+          </div>
+          <div class="confirm-item">
+            <span class="confirm-label" data-i18n="ci_confirm_email">Email</span>
+            <span class="confirm-value" id="confirmEmail"></span>
+          </div>
+          <div class="confirm-item">
+            <span class="confirm-label" data-i18n="ci_confirm_occupation">Occupation</span>
+            <span class="confirm-value" id="confirmOccupation"></span>
+          </div>
+        </div>
+
+        <div class="confirm-section">
+          <h3 data-i18n="ci_confirm_body_info">Body Information</h3>
+          <div class="confirm-item">
+            <span class="confirm-label" data-i18n="ci_body_height">Height</span>
+            <span class="confirm-value" id="confirmHeight"></span>
+          </div>
+          <div class="confirm-item">
+            <span class="confirm-label" data-i18n="ci_body_weight">Weight</span>
+            <span class="confirm-value" id="confirmWeight"></span>
+          </div>
+          <div class="confirm-item">
+            <span class="confirm-label" data-i18n="ci_body_clothing">Clothing</span>
+            <span class="confirm-value" id="confirmClothingSize"></span>
+          </div>
+        </div>
+
+        <div class="confirm-section">
+          <h3 data-i18n="ci_confirm_diag_info">Diagnosis Information</h3>
+          <div class="confirm-item full">
+            <span class="confirm-label" data-i18n="ci_confirm_reason">Reason</span>
+            <p class="confirm-text" id="confirmReason"></p>
+          </div>
+          <div class="confirm-item full">
+            <span class="confirm-label" data-i18n="ci_confirm_style">Style Pref.</span>
+            <p class="confirm-text" id="confirmStyle"></p>
+          </div>
+        </div>
+
+        <div class="confirm-section">
+          <h3 data-i18n="ci_confirm_uploads">Uploaded Photos/Videos</h3>
+          <div class="confirm-images" id="confirmImages"></div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="edit-btn" onclick="goBackToInput()" data-i18n="ci_btn_back">Go Back</button>
+        <button type="button" class="complete-btn" onclick="submitData()" data-i18n="ci_btn_complete">Complete</button>
+      </div>
+    </div>
+
+    <!-- ========== COMPLETE PAGE ========== -->
+    <div id="completePage" style="display: none;">
+      <header class="page-header">
+        <h1 class="page-title">APL IMAGE</h1>
+      </header>
+
+      <div class="complete-message">
+        <div class="complete-icon">&#10003;</div>
+        <h2 data-i18n="ci_complete_title">Information submitted successfully!</h2>
+        <p><span id="completeName"></span><span data-i18n="ci_complete_thanks">, thank you.</span></p>
+
+        <!-- AI Diagnosis Loading -->
+        <div class="ai-diagnosis-loading" id="aiDiagnosisLoading">
+          <h3 data-i18n="ci_loading_title">Generating demo diagnosis...</h3>
+          <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <p class="progress-text"><span id="progressPercent">0</span>%</p>
+        </div>
+
+        <!-- AI Diagnosis Result -->
+        <div class="ai-diagnosis-result" id="aiDiagnosisResult" style="display: none;"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="spinner-overlay" id="spinnerOverlay">
+    <div class="spinner"></div>
+    <p class="spinner-text" data-i18n="ci_spinner_text">Processing your information...</p>
+  </div>
+
+  <!-- Face Photos Upload Modal -->
+  <div class="modal" id="facePhotosModal" style="display: none;">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h3 class="modal-title" data-i18n="ci_modal_face_title">Face Photo Guide & Upload</h3>
+        <button class="modal-close" onclick="closeFacePhotosModal()">&times;</button>
+      </div>
+      <p class="modal-description" data-i18n="ci_modal_face_desc">Follow the guide below to take and upload your face photos.</p>
+
+      <!-- Guide images -->
+      <div class="guide-images-section">
+        <div class="guide-image-item">
+          <h4 data-i18n="ci_guide_front">1. Front</h4>
+          <div class="guide-placeholder">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="20" r="12" stroke="currentColor" stroke-width="2"/><path d="M12 56c0-11 8.95-20 20-20s20 9 20 20" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <p data-i18n="ci_guide_front_desc">Look straight ahead,<br>show your full face</p>
+        </div>
+        <div class="guide-image-item">
+          <h4 data-i18n="ci_guide_45">2. 45°</h4>
+          <div class="guide-placeholder">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="28" cy="20" r="12" stroke="currentColor" stroke-width="2"/><path d="M8 56c0-11 8.95-20 20-20s20 9 20 20" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <p data-i18n="ci_guide_45_desc">Turn 45 degrees,<br>show your side profile</p>
+        </div>
+        <div class="guide-image-item">
+          <h4 data-i18n="ci_guide_side">3. Side</h4>
+          <div class="guide-placeholder">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="20" rx="8" ry="12" stroke="currentColor" stroke-width="2"/><path d="M16 56c0-11 7.16-20 16-20s16 9 16 20" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <p data-i18n="ci_guide_side_desc">Face completely sideways,<br>show your side profile line</p>
+        </div>
+      </div>
+
+      <!-- Tips -->
+      <div class="guide-tips">
+        <div class="tips-column">
+          <h4 data-i18n="ci_tip_camera">Camera Settings</h4>
+          <ul>
+            <li data-i18n="ci_tip_camera_1">Use default camera mode (no wide angle)</li>
+            <li data-i18n="ci_tip_camera_2">Rear camera recommended</li>
+            <li data-i18n="ci_tip_camera_3">Camera height: between eyes and mouth</li>
+            <li data-i18n="ci_tip_camera_4">Distance: slightly more than arm's length (60cm)</li>
+          </ul>
+        </div>
+        <div class="tips-column">
+          <h4 data-i18n="ci_tip_lighting">Lighting & Background</h4>
+          <ul>
+            <li data-i18n="ci_tip_lighting_1">Shoot in bright area (natural light best)</li>
+            <li data-i18n="ci_tip_lighting_2">Light source facing your face</li>
+            <li data-i18n="ci_tip_lighting_3">Avoid backlighting</li>
+            <li data-i18n="ci_tip_lighting_4">Simple background (white, beige recommended)</li>
+          </ul>
+        </div>
+        <div class="tips-column">
+          <h4 data-i18n="ci_tip_clothing">Clothing & Accessories</h4>
+          <ul>
+            <li data-i18n="ci_tip_clothing_1">White or beige solid-colored top recommended</li>
+            <li data-i18n="ci_tip_clothing_2">Round neckline showing shoulders</li>
+            <li data-i18n="ci_tip_clothing_3">No patterns or bold colors</li>
+            <li data-i18n="ci_tip_clothing_4">Remove sunglasses, hats, earrings</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <h4 data-i18n="ci_tip_accuracy">Accuracy Tip</h4>
+        <p data-i18n="ci_tip_accuracy_desc">Photo quality directly affects analysis accuracy. Lighting (natural frontal light) and background (simple, bright) are the most important factors.</p>
+      </div>
+
+      <hr class="modal-divider">
+
+      <!-- Photo Upload Area -->
+      <h4 class="upload-grid-title" data-i18n="ci_modal_upload_title">Photo Upload</h4>
+      <div class="photo-upload-grid">
+        <div class="photo-upload-item">
+          <div class="photo-upload-header">
+            <h4 class="photo-label" data-i18n="ci_label_front">Front</h4>
+            <span class="badge badge-required" data-i18n="ci_badge_required">Required</span>
+          </div>
+          <div class="photo-upload-box" id="faceFrontUploadBox" onclick="document.getElementById('faceFrontImage').click()">
+            <input type="file" id="faceFrontImage" accept="image/*" style="display: none;" onchange="handleModalImageUpload(this, 'faceFront')">
+            <div class="photo-placeholder" id="faceFrontPlaceholder">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/><path d="M24 14V34M14 24H34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <p class="photo-placeholder-text" data-i18n="ci_label_front_photo">Front photo</p>
+            </div>
+            <div class="photo-preview" id="faceFrontPreview"></div>
+          </div>
+        </div>
+        <div class="photo-upload-item">
+          <div class="photo-upload-header">
+            <h4 class="photo-label">45°</h4>
+            <span class="badge badge-optional" data-i18n="ci_badge_optional">Optional</span>
+          </div>
+          <div class="photo-upload-box" id="face45UploadBox" onclick="document.getElementById('face45Image').click()">
+            <input type="file" id="face45Image" accept="image/*" style="display: none;" onchange="handleModalImageUpload(this, 'face45')">
+            <div class="photo-placeholder" id="face45Placeholder">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/><path d="M24 14V34M14 24H34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <p class="photo-placeholder-text" data-i18n="ci_label_45_photo">45° photo</p>
+            </div>
+            <div class="photo-preview" id="face45Preview"></div>
+          </div>
+        </div>
+        <div class="photo-upload-item">
+          <div class="photo-upload-header">
+            <h4 class="photo-label" data-i18n="ci_label_side">Side</h4>
+            <span class="badge badge-optional" data-i18n="ci_badge_optional">Optional</span>
+          </div>
+          <div class="photo-upload-box" id="faceSideUploadBox" onclick="document.getElementById('faceSideImage').click()">
+            <input type="file" id="faceSideImage" accept="image/*" style="display: none;" onchange="handleModalImageUpload(this, 'faceSide')">
+            <div class="photo-placeholder" id="faceSidePlaceholder">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/><path d="M24 14V34M14 24H34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <p class="photo-placeholder-text" data-i18n="ci_label_side_photo">Side photo</p>
+            </div>
+            <div class="photo-preview" id="faceSidePreview"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeFacePhotosModal()" data-i18n="ci_btn_cancel">Cancel</button>
+        <button class="btn btn-primary" id="saveFacePhotosBtn" onclick="saveFacePhotos()" disabled data-i18n="ci_btn_save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Face Video Guide Modal -->
+  <div class="modal" id="faceVideoModal" style="display: none;">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h3 class="modal-title" data-i18n="ci_modal_face_video_title">Face Video Guide & Upload</h3>
+        <button class="modal-close" onclick="closeFaceVideoGuide()">&times;</button>
+      </div>
+      <p class="modal-description" data-i18n="ci_modal_face_video_desc">Follow the guide below to record and upload your face video.</p>
+
+      <div class="guide-tips compact">
+        <div class="tips-column">
+          <h4 data-i18n="ci_video_guide_title">Video Guide</h4>
+          <ul>
+            <li data-i18n="ci_video_guide_1">Lighting: shoot in bright natural light</li>
+            <li data-i18n="ci_video_guide_2">Angle: slowly turn from front to sides</li>
+            <li data-i18n="ci_video_guide_3">Speed: not too fast</li>
+            <li data-i18n="ci_video_guide_4">Duration: about 5-10 seconds</li>
+          </ul>
+        </div>
+        <div class="tips-column">
+          <h4 data-i18n="ci_video_tip_title">Recording Tips</h4>
+          <ul>
+            <li data-i18n="ci_video_tip_1">Hold phone vertically</li>
+            <li data-i18n="ci_video_tip_2">Keep 1-1.5m distance from camera</li>
+            <li data-i18n="ci_video_tip_3">Choose a simple background</li>
+            <li data-i18n="ci_video_tip_4">File size under 50MB</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="modal-divider">
+
+      <h4 class="upload-grid-title" data-i18n="ci_video_upload_title">Video Upload</h4>
+      <div class="video-upload-area">
+        <input type="file" id="faceVideoInput" accept="video/*" style="display: none;" onchange="handleVideoUploadFromModal(this, 'faceVideo')">
+        <button class="btn btn-primary btn-large" onclick="document.getElementById('faceVideoInput').click()" data-i18n="ci_btn_select_video">Select Video</button>
+        <div id="faceVideoPreviewModal" class="video-preview-modal"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeFaceVideoGuide()" data-i18n="ci_btn_close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body Photos Upload Modal -->
+  <div class="modal" id="bodyPhotosModal" style="display: none;">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h3 class="modal-title" data-i18n="ci_modal_body_title">Body Photo Guide & Upload</h3>
+        <button class="modal-close" onclick="closeBodyPhotosModal()">&times;</button>
+      </div>
+      <p class="modal-description" data-i18n="ci_modal_body_desc">Follow the guide below to take and upload your body photos.</p>
+
+      <div class="guide-images-section">
+        <div class="guide-image-item">
+          <h4 data-i18n="ci_guide_front">1. Front</h4>
+          <div class="guide-placeholder">
+            <svg width="64" height="80" viewBox="0 0 64 80" fill="none"><circle cx="32" cy="14" r="10" stroke="currentColor" stroke-width="2"/><path d="M20 30h24v25H20z" stroke="currentColor" stroke-width="2" rx="2"/><path d="M24 55v20M40 55v20" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <p data-i18n="ci_guide_body_front_desc">Look straight ahead,<br>show your full body</p>
+        </div>
+        <div class="guide-image-item">
+          <h4 data-i18n="ci_guide_45">2. 45°</h4>
+          <div class="guide-placeholder">
+            <svg width="64" height="80" viewBox="0 0 64 80" fill="none"><circle cx="28" cy="14" r="10" stroke="currentColor" stroke-width="2"/><path d="M16 30h24v25H16z" stroke="currentColor" stroke-width="2" rx="2"/><path d="M20 55v20M36 55v20" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <p data-i18n="ci_guide_body_45_desc">Turn 45 degrees,<br>show your body line</p>
+        </div>
+        <div class="guide-image-item">
+          <h4 data-i18n="ci_guide_side">3. Side</h4>
+          <div class="guide-placeholder">
+            <svg width="64" height="80" viewBox="0 0 64 80" fill="none"><circle cx="32" cy="14" r="10" stroke="currentColor" stroke-width="2"/><path d="M26 30h12v25H26z" stroke="currentColor" stroke-width="2" rx="2"/><path d="M28 55v20M36 55v20" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <p data-i18n="ci_guide_body_side_desc">Face completely sideways,<br>show your silhouette</p>
+        </div>
+      </div>
+
+      <div class="guide-tips">
+        <div class="tips-column">
+          <h4 data-i18n="ci_tip_body_camera">Camera Settings</h4>
+          <ul>
+            <li data-i18n="ci_tip_body_camera_1">Use default camera mode</li>
+            <li data-i18n="ci_tip_body_camera_2">Camera at waist-chest height</li>
+            <li data-i18n="ci_tip_body_camera_3">Distance: full body visible (2-3m)</li>
+            <li data-i18n="ci_tip_body_camera_4">Keep camera vertical</li>
+          </ul>
+        </div>
+        <div class="tips-column">
+          <h4 data-i18n="ci_tip_body_clothing">Outfit</h4>
+          <ul>
+            <li data-i18n="ci_tip_body_clothing_1">Wear fitted clothing (not too loose)</li>
+            <li data-i18n="ci_tip_body_clothing_2">Solid-colored clothes recommended</li>
+            <li data-i18n="ci_tip_body_clothing_3">Clothes that show body lines</li>
+            <li data-i18n="ci_tip_body_clothing_4">Minimize accessories</li>
+          </ul>
+        </div>
+        <div class="tips-column">
+          <h4 data-i18n="ci_tip_body_posture">Posture</h4>
+          <ul>
+            <li data-i18n="ci_tip_body_posture_1">Stand upright</li>
+            <li data-i18n="ci_tip_body_posture_2">Arms naturally at your sides</li>
+            <li data-i18n="ci_tip_body_posture_3">Include full body from head to toe</li>
+            <li data-i18n="ci_tip_body_posture_4">Center yourself in the frame</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <h4 data-i18n="ci_tip_accuracy">Accuracy Tip</h4>
+        <p data-i18n="ci_tip_accuracy_desc">Photo quality directly affects analysis accuracy. Lighting (natural frontal light) and background (simple, bright) are the most important factors.</p>
+      </div>
+
+      <hr class="modal-divider">
+
+      <h4 class="upload-grid-title" data-i18n="ci_modal_upload_title">Photo Upload</h4>
+      <div class="photo-upload-grid">
+        <div class="photo-upload-item">
+          <div class="photo-upload-header">
+            <h4 class="photo-label" data-i18n="ci_label_front">Front</h4>
+            <span class="badge badge-required" data-i18n="ci_badge_required">Required</span>
+          </div>
+          <div class="photo-upload-box" id="bodyFrontUploadBox" onclick="document.getElementById('bodyFrontImage').click()">
+            <input type="file" id="bodyFrontImage" accept="image/*" style="display: none;" onchange="handleModalImageUpload(this, 'bodyFront')">
+            <div class="photo-placeholder" id="bodyFrontPlaceholder">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/><path d="M24 14V34M14 24H34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <p class="photo-placeholder-text" data-i18n="ci_label_front_photo">Front photo</p>
+            </div>
+            <div class="photo-preview" id="bodyFrontPreview"></div>
+          </div>
+        </div>
+        <div class="photo-upload-item">
+          <div class="photo-upload-header">
+            <h4 class="photo-label">45°</h4>
+            <span class="badge badge-optional" data-i18n="ci_badge_optional">Optional</span>
+          </div>
+          <div class="photo-upload-box" id="body45UploadBox" onclick="document.getElementById('body45Image').click()">
+            <input type="file" id="body45Image" accept="image/*" style="display: none;" onchange="handleModalImageUpload(this, 'body45')">
+            <div class="photo-placeholder" id="body45Placeholder">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/><path d="M24 14V34M14 24H34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <p class="photo-placeholder-text" data-i18n="ci_label_45_photo">45° photo</p>
+            </div>
+            <div class="photo-preview" id="body45Preview"></div>
+          </div>
+        </div>
+        <div class="photo-upload-item">
+          <div class="photo-upload-header">
+            <h4 class="photo-label" data-i18n="ci_label_side">Side</h4>
+            <span class="badge badge-optional" data-i18n="ci_badge_optional">Optional</span>
+          </div>
+          <div class="photo-upload-box" id="bodySideUploadBox" onclick="document.getElementById('bodySideImage').click()">
+            <input type="file" id="bodySideImage" accept="image/*" style="display: none;" onchange="handleModalImageUpload(this, 'bodySide')">
+            <div class="photo-placeholder" id="bodySidePlaceholder">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/><path d="M24 14V34M14 24H34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <p class="photo-placeholder-text" data-i18n="ci_label_side_photo">Side photo</p>
+            </div>
+            <div class="photo-preview" id="bodySidePreview"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeBodyPhotosModal()" data-i18n="ci_btn_cancel">Cancel</button>
+        <button class="btn btn-primary" id="saveBodyPhotosBtn" onclick="saveBodyPhotos()" disabled data-i18n="ci_btn_save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body Video Guide Modal -->
+  <div class="modal" id="bodyVideoModal" style="display: none;">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h3 class="modal-title" data-i18n="ci_modal_body_video_title">Body Video Guide & Upload</h3>
+        <button class="modal-close" onclick="closeBodyVideoGuide()">&times;</button>
+      </div>
+      <p class="modal-description" data-i18n="ci_modal_body_video_desc">Follow the guide below to record and upload your body video.</p>
+
+      <div class="guide-tips compact">
+        <div class="tips-column">
+          <h4 data-i18n="ci_body_video_guide_title">Video Guide</h4>
+          <ul>
+            <li data-i18n="ci_body_video_guide_1">Show full body clearly</li>
+            <li data-i18n="ci_body_video_guide_2">Rotate 360 degrees in place</li>
+            <li data-i18n="ci_body_video_guide_3">Turn slowly</li>
+            <li data-i18n="ci_body_video_guide_4">Duration: about 15-20 seconds</li>
+          </ul>
+        </div>
+        <div class="tips-column">
+          <h4 data-i18n="ci_video_tip_title">Recording Tips</h4>
+          <ul>
+            <li data-i18n="ci_body_video_tip_1">Fix camera at waist height</li>
+            <li data-i18n="ci_body_video_tip_2">Wear fitted clothing</li>
+            <li data-i18n="ci_video_tip_3">Choose a simple background</li>
+            <li data-i18n="ci_video_tip_4">File size under 50MB</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="modal-divider">
+
+      <h4 class="upload-grid-title" data-i18n="ci_video_upload_title">Video Upload</h4>
+      <div class="video-upload-area">
+        <input type="file" id="bodyVideoInput" accept="video/*" style="display: none;" onchange="handleVideoUploadFromModal(this, 'bodyVideo')">
+        <button class="btn btn-primary btn-large" onclick="document.getElementById('bodyVideoInput').click()" data-i18n="ci_btn_select_video">Select Video</button>
+        <div id="bodyVideoPreviewModal" class="video-preview-modal"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeBodyVideoGuide()" data-i18n="ci_btn_close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="common/constants.js"></script>
+  <script src="common/data-schema.js"></script>
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
