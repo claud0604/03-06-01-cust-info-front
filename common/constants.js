@@ -8,7 +8,7 @@
 
 // ========== API CONFIG ==========
 const API_CONFIG = {
-  BASE_URL: 'https://facefree-api.apls.kr',
+  BASE_URL: 'https://api-030601-custinfo.apls.kr',
   ENDPOINTS: {
     CUSTOMERS: '/api/customers',
     PRESIGNED_URL: '/api/upload/presigned-url',
