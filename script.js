@@ -585,8 +585,6 @@ async function submitData() {
     document.getElementById('completeName').textContent = customer.customerInfo.name;
     window.scrollTo(0, 0);
 
-    startAIDiagnosisProgress();
-
   } catch (error) {
     hideSpinner();
     console.error('Submit error:', error);
@@ -753,92 +751,3 @@ async function updateCustomerPhotos(customerId, uploadResult) {
   return data;
 }
 
-// ========== AI DIAGNOSIS PROGRESS ==========
-async function startAIDiagnosisProgress() {
-  await generateAIDiagnosis();
-}
-
-function updateProgress(percent) {
-  document.getElementById('progressBar').style.width = percent + '%';
-  document.getElementById('progressPercent').textContent = percent;
-}
-
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function generateAIDiagnosis() {
-  try {
-    const customerId = getSelectedCustomerId();
-    if (!customerId) throw new Error('Customer ID not found.');
-
-    updateProgress(10);
-    await delay(300);
-    updateProgress(20);
-    await delay(300);
-    updateProgress(30);
-
-    updateProgress(40);
-
-    const response = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.AI_DIAGNOSE), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ customerId })
-    });
-
-    updateProgress(60);
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'AI diagnosis API call failed');
-    }
-
-    const result = await response.json();
-    updateProgress(70);
-    await delay(300);
-    updateProgress(80);
-    await delay(300);
-    updateProgress(90);
-    await delay(300);
-    updateProgress(100);
-    await delay(500);
-
-    document.getElementById('aiDiagnosisLoading').style.display = 'none';
-    document.getElementById('aiDiagnosisResult').style.display = 'block';
-
-    const aiDiagnosis = result.aiDiagnosis;
-    document.getElementById('aiDiagnosisResult').innerHTML = `
-      <h3 style="font-family: var(--serif); color: var(--accent); font-weight: 400; margin-bottom: 16px;">
-        ${getTranslation('ci_result_title')}
-      </h3>
-      <div style="text-align: left; margin: 20px auto; max-width: 500px; background: var(--surface); padding: 20px; border-radius: 10px;">
-        <p style="margin: 10px 0; color: var(--text);"><strong>${getTranslation('ci_result_color')}:</strong> ${aiDiagnosis.personalColor}</p>
-        <p style="margin: 10px 0; color: var(--text);"><strong>${getTranslation('ci_result_face')}:</strong> ${aiDiagnosis.faceShape}</p>
-        <p style="margin: 10px 0; color: var(--text);"><strong>${getTranslation('ci_result_body')}:</strong> ${aiDiagnosis.bodyType}</p>
-      </div>
-      <p style="margin: 20px 0; color: var(--text-muted);">
-        ${getTranslation('ci_result_detail')}
-      </p>
-      <button onclick="goToResultPage()"
-        style="display: inline-block; padding: 15px 40px; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: 500; font-size: 1rem; box-shadow: 0 4px 15px rgba(160,120,64,0.3); cursor: pointer; font-family: var(--sans);">
-        ${getTranslation('ci_result_btn')}
-      </button>
-    `;
-
-  } catch (error) {
-    console.error('AI diagnosis error:', error);
-    updateProgress(100);
-    document.getElementById('aiDiagnosisLoading').style.display = 'none';
-    document.getElementById('aiDiagnosisResult').style.display = 'block';
-    document.getElementById('aiDiagnosisResult').innerHTML = `
-      <h3 style="font-family: var(--serif); color: var(--coral); font-weight: 400;">${getTranslation('ci_result_error_title')}</h3>
-      <p style="color: var(--text-muted); margin: 15px 0;">${error.message}</p>
-      <p style="color: var(--text-dim); font-size: 0.88rem;">${getTranslation('ci_result_error_desc')}</p>
-    `;
-  }
-}
-
-async function goToResultPage() {
-  const customerId = getSelectedCustomerId();
-  window.open(`https://03-03-03-result-frontend.pages.dev/?demo=${customerId}`, '_blank');
-}

@@ -24,19 +24,19 @@ function getApiUrl(endpoint) {
 
 // ========== PERSONAL COLOR TYPES (14) ==========
 const PERSONAL_COLOR_TYPES = {
-  SPRING_BRIGHT: { code: 'SPRING_BRIGHT', label: 'Spring Bright', season: 'spring' },
-  SPRING_WARM: { code: 'SPRING_WARM', label: 'Spring Warm', season: 'spring' },
   SPRING_LIGHT: { code: 'SPRING_LIGHT', label: 'Spring Light', season: 'spring' },
+  SPRING_BRIGHT: { code: 'SPRING_BRIGHT', label: 'Spring Bright', season: 'spring' },
+  SPRING_CLEAR: { code: 'SPRING_CLEAR', label: 'Spring Clear', season: 'spring' },
+  SPRING_SOFT: { code: 'SPRING_SOFT', label: 'Spring Soft', season: 'spring' },
   SUMMER_LIGHT: { code: 'SUMMER_LIGHT', label: 'Summer Light', season: 'summer' },
-  SUMMER_COOL: { code: 'SUMMER_COOL', label: 'Summer Cool', season: 'summer' },
+  SUMMER_BRIGHT: { code: 'SUMMER_BRIGHT', label: 'Summer Bright', season: 'summer' },
   SUMMER_MUTE: { code: 'SUMMER_MUTE', label: 'Summer Mute', season: 'summer' },
   AUTUMN_MUTE: { code: 'AUTUMN_MUTE', label: 'Autumn Mute', season: 'autumn' },
-  AUTUMN_WARM: { code: 'AUTUMN_WARM', label: 'Autumn Warm', season: 'autumn' },
   AUTUMN_DEEP: { code: 'AUTUMN_DEEP', label: 'Autumn Deep', season: 'autumn' },
-  WINTER_DEEP: { code: 'WINTER_DEEP', label: 'Winter Deep', season: 'winter' },
-  WINTER_COOL: { code: 'WINTER_COOL', label: 'Winter Cool', season: 'winter' },
-  WINTER_BRIGHT: { code: 'WINTER_BRIGHT', label: 'Winter Bright', season: 'winter' },
   AUTUMN_STRONG: { code: 'AUTUMN_STRONG', label: 'Autumn Strong', season: 'autumn' },
+  WINTER_DEEP: { code: 'WINTER_DEEP', label: 'Winter Deep', season: 'winter' },
+  WINTER_CLEAR: { code: 'WINTER_CLEAR', label: 'Winter Clear', season: 'winter' },
+  WINTER_SOFT: { code: 'WINTER_SOFT', label: 'Winter Soft', season: 'winter' },
   WINTER_STRONG: { code: 'WINTER_STRONG', label: 'Winter Strong', season: 'winter' }
 };
 
