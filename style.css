@@ -573,7 +573,8 @@ textarea {
 }
 
 .face-preview-summary,
-.body-preview-summary {
+.body-preview-summary,
+.ref-preview-summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -787,6 +788,12 @@ textarea {
 }
 .ref-upload-box:hover .ref-remove-btn {
   opacity: 1;
+}
+
+.ref-slot-label {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-dim);
 }
 
 /* Image remove button */
@@ -1048,6 +1055,11 @@ textarea {
 .modal-large {
   max-width: 900px;
   max-height: 90vh;
+}
+
+.modal-medium {
+  max-width: 520px;
+  max-height: 85vh;
 }
 
 .modal-header {
@@ -1426,6 +1438,7 @@ textarea {
   }
 
   .modal-large { max-width: 95%; }
+  .modal-medium { max-width: 95%; }
 
   .guide-images-section {
     grid-template-columns: 1fr;

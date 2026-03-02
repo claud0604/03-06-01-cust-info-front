@@ -429,9 +429,50 @@ function handleVideoUploadFromModal(input, type) {
   alert(getTranslation('ci_alert_video_uploaded'));
 }
 
+// ========== REFERENCE PHOTO MODALS (Makeup / Fashion) ==========
+function openRefModal(type) {
+  document.getElementById(type + 'RefModal').style.display = 'flex';
+}
+
+function closeRefModal(type) {
+  document.getElementById(type + 'RefModal').style.display = 'none';
+}
+
+function saveRefPhotos(type) {
+  closeRefModal(type);
+  updateRefThumbnails(type);
+}
+
+function updateRefThumbnails(type) {
+  const placeholder = document.getElementById(type + 'Placeholder');
+  const summary = document.getElementById(type + 'PreviewSummary');
+  const thumbnailsContainer = document.getElementById(type + 'Thumbnails');
+
+  const files = (uploadedImages[type] || []).filter(Boolean);
+
+  if (files.length === 0) {
+    placeholder.style.display = '';
+    summary.style.display = 'none';
+    return;
+  }
+
+  placeholder.style.display = 'none';
+  summary.style.display = 'flex';
+  thumbnailsContainer.innerHTML = '';
+
+  files.forEach(file => {
+    const thumbDiv = document.createElement('div');
+    thumbDiv.className = 'thumbnail-item';
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    thumbDiv.appendChild(img);
+    thumbnailsContainer.appendChild(thumbDiv);
+  });
+}
+
 // ========== MODAL OUTSIDE CLICK ==========
 document.addEventListener('click', function(e) {
-  const modals = ['facePhotosModal', 'bodyPhotosModal', 'faceVideoModal', 'bodyVideoModal'];
+  const modals = ['facePhotosModal', 'bodyPhotosModal', 'faceVideoModal', 'bodyVideoModal', 'makeupRefModal', 'fashionRefModal'];
   modals.forEach(id => {
     const modal = document.getElementById(id);
     if (e.target === modal) {
