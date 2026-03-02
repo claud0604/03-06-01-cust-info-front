@@ -115,6 +115,15 @@ const translations = {
     ci_modal_body_video_title: 'Body Video Guide & Upload',
     ci_modal_body_video_desc: 'Follow the guide below to record and upload your body video.',
 
+    // Modal - Reference (Makeup / Fashion)
+    ci_modal_makeup_title: 'Makeup Style Photos',
+    ci_modal_makeup_desc: 'Upload up to 2 photos of your usual makeup style.',
+    ci_modal_fashion_title: 'Fashion Style Photos',
+    ci_modal_fashion_desc: 'Upload up to 2 photos of your usual fashion style.',
+    ci_upload_makeup_click: 'Click to upload makeup photos',
+    ci_upload_fashion_click: 'Click to upload fashion photos',
+    ci_upload_ref_hint: 'Add up to 2 reference photos',
+
     // Modal Upload
     ci_modal_upload_title: 'Photo Upload',
     ci_video_upload_title: 'Video Upload',
@@ -312,6 +321,13 @@ const translations = {
     ci_modal_body_desc: '아래 가이드를 참고하여 체형 사진을 촬영하고 업로드해주세요.',
     ci_modal_body_video_title: '체형 영상 촬영 가이드 & 업로드',
     ci_modal_body_video_desc: '아래 가이드 영상을 참고하여 체형 영상을 촬영하고 업로드해주세요.',
+    ci_modal_makeup_title: '메이크업 스타일 사진',
+    ci_modal_makeup_desc: '평소 화장 스타일 사진을 최대 2장 업로드해주세요.',
+    ci_modal_fashion_title: '패션 스타일 사진',
+    ci_modal_fashion_desc: '평소 패션 스타일 사진을 최대 2장 업로드해주세요.',
+    ci_upload_makeup_click: '클릭하여 메이크업 사진 업로드',
+    ci_upload_fashion_click: '클릭하여 패션 사진 업로드',
+    ci_upload_ref_hint: '최대 2장까지 업로드 가능',
     ci_modal_upload_title: '사진 업로드',
     ci_video_upload_title: '영상 업로드',
 
@@ -501,6 +517,13 @@ const translations = {
     ci_modal_body_desc: '以下のガイドを参考に体型写真を撮影してアップロードしてください。',
     ci_modal_body_video_title: '体型動画撮影ガイド＆アップロード',
     ci_modal_body_video_desc: '以下のガイドを参考に体型動画を撮影してアップロードしてください。',
+    ci_modal_makeup_title: 'メイクスタイル写真',
+    ci_modal_makeup_desc: '普段のメイクスタイルの写真を最大2枚アップロードしてください。',
+    ci_modal_fashion_title: 'ファッションスタイル写真',
+    ci_modal_fashion_desc: '普段のファッションスタイルの写真を最大2枚アップロードしてください。',
+    ci_upload_makeup_click: 'クリックしてメイク写真をアップロード',
+    ci_upload_fashion_click: 'クリックしてファッション写真をアップロード',
+    ci_upload_ref_hint: '最大2枚まで追加可能',
     ci_modal_upload_title: '写真アップロード',
     ci_video_upload_title: '動画アップロード',
 
@@ -690,6 +713,13 @@ const translations = {
     ci_modal_body_desc: '请参考以下指南拍摄并上传体型照片。',
     ci_modal_body_video_title: '体型视频拍摄指南及上传',
     ci_modal_body_video_desc: '请参考以下指南拍摄并上传体型视频。',
+    ci_modal_makeup_title: '妆容风格照片',
+    ci_modal_makeup_desc: '请上传最多2张日常妆容风格照片。',
+    ci_modal_fashion_title: '时尚风格照片',
+    ci_modal_fashion_desc: '请上传最多2张日常时尚风格照片。',
+    ci_upload_makeup_click: '点击上传妆容照片',
+    ci_upload_fashion_click: '点击上传时尚照片',
+    ci_upload_ref_hint: '最多可添加2张参考照片',
     ci_modal_upload_title: '照片上传',
     ci_video_upload_title: '视频上传',
 
