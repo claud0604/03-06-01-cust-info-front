@@ -240,13 +240,20 @@
           <!-- Makeup References -->
           <div class="upload-section">
             <h4 class="upload-section-title" data-i18n="ci_makeup_title">c. Usual Makeup Style (Optional, max 2)</h4>
-            <div class="upload-row single">
-              <div class="upload-item wide">
-                <div class="preview-container multi" id="makeupPreview"></div>
-                <div class="upload-btn-wrapper">
-                  <button type="button" class="upload-btn" data-i18n="ci_btn_select_photo">Select Photos</button>
-                  <input type="file" id="makeupImages" accept="image/*" multiple onchange="handleMultiImageUpload(this, 'makeup', 2)">
+            <div class="ref-upload-grid">
+              <div class="ref-upload-box" onclick="document.getElementById('makeupImage0').click()">
+                <input type="file" id="makeupImage0" accept="image/*" style="display:none;" onchange="handleRefSlotUpload(this, 'makeup', 0)">
+                <div class="ref-upload-placeholder" id="makeupSlot0">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M16 10V22M10 16H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                 </div>
+                <div class="ref-upload-preview" id="makeupPreview0"></div>
+              </div>
+              <div class="ref-upload-box" onclick="document.getElementById('makeupImage1').click()">
+                <input type="file" id="makeupImage1" accept="image/*" style="display:none;" onchange="handleRefSlotUpload(this, 'makeup', 1)">
+                <div class="ref-upload-placeholder" id="makeupSlot1">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M16 10V22M10 16H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <div class="ref-upload-preview" id="makeupPreview1"></div>
               </div>
             </div>
           </div>
@@ -301,13 +308,20 @@
           <!-- Fashion References -->
           <div class="upload-section">
             <h4 class="upload-section-title" data-i18n="ci_fashion_title">c. Usual Fashion Style (Optional, max 2)</h4>
-            <div class="upload-row single">
-              <div class="upload-item wide">
-                <div class="preview-container multi" id="fashionPreview"></div>
-                <div class="upload-btn-wrapper">
-                  <button type="button" class="upload-btn" data-i18n="ci_btn_select_photo">Select Photos</button>
-                  <input type="file" id="fashionImages" accept="image/*" multiple onchange="handleMultiImageUpload(this, 'fashion', 2)">
+            <div class="ref-upload-grid">
+              <div class="ref-upload-box" onclick="document.getElementById('fashionImage0').click()">
+                <input type="file" id="fashionImage0" accept="image/*" style="display:none;" onchange="handleRefSlotUpload(this, 'fashion', 0)">
+                <div class="ref-upload-placeholder" id="fashionSlot0">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M16 10V22M10 16H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                 </div>
+                <div class="ref-upload-preview" id="fashionPreview0"></div>
+              </div>
+              <div class="ref-upload-box" onclick="document.getElementById('fashionImage1').click()">
+                <input type="file" id="fashionImage1" accept="image/*" style="display:none;" onchange="handleRefSlotUpload(this, 'fashion', 1)">
+                <div class="ref-upload-placeholder" id="fashionSlot1">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M16 10V22M10 16H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <div class="ref-upload-preview" id="fashionPreview1"></div>
               </div>
             </div>
           </div>

@@ -202,28 +202,55 @@ async function compressImage(file) {
   }
 }
 
-// ========== MULTI IMAGE UPLOAD ==========
-async function handleMultiImageUpload(input, type, maxCount) {
-  const files = Array.from(input.files).slice(0, maxCount);
-  if (files.length === 0) return;
+// ========== REFERENCE SLOT UPLOAD (2-box click-to-upload) ==========
+async function handleRefSlotUpload(input, type, slotIndex) {
+  const file = input.files[0];
+  if (!file) return;
 
-  const previewContainer = document.getElementById(type + 'Preview');
-  previewContainer.innerHTML = '';
-  uploadedImages[type] = [];
+  const compressedFile = await compressImage(file);
 
-  for (const file of files) {
-    const compressedFile = await compressImage(file);
-    uploadedImages[type].push(compressedFile);
+  // Initialize array if needed
+  if (!Array.isArray(uploadedImages[type])) uploadedImages[type] = [];
+  uploadedImages[type][slotIndex] = compressedFile;
 
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const img = document.createElement('img');
-      img.src = e.target.result;
-      img.className = 'preview-thumb';
-      previewContainer.appendChild(img);
+  const placeholder = document.getElementById(type + 'Slot' + slotIndex);
+  const preview = document.getElementById(type + 'Preview' + slotIndex);
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    preview.innerHTML = '';
+    const img = document.createElement('img');
+    img.src = e.target.result;
+    preview.appendChild(img);
+
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'ref-remove-btn';
+    removeBtn.innerHTML = '&times;';
+    removeBtn.onclick = function(ev) {
+      ev.stopPropagation();
+      removeRefSlot(type, slotIndex);
     };
-    reader.readAsDataURL(compressedFile);
+    preview.appendChild(removeBtn);
+
+    preview.classList.add('active');
+    placeholder.style.display = 'none';
+  };
+  reader.readAsDataURL(compressedFile);
+}
+
+function removeRefSlot(type, slotIndex) {
+  if (Array.isArray(uploadedImages[type])) {
+    uploadedImages[type][slotIndex] = null;
   }
+  const placeholder = document.getElementById(type + 'Slot' + slotIndex);
+  const preview = document.getElementById(type + 'Preview' + slotIndex);
+  const input = document.getElementById(type + 'Image' + slotIndex);
+
+  preview.innerHTML = '';
+  preview.classList.remove('active');
+  placeholder.style.display = '';
+  if (input) input.value = '';
 }
 
 // ========== MODAL IMAGE UPLOAD ==========
@@ -495,7 +522,7 @@ function displayConfirmImages() {
   });
 
   ['makeup', 'fashion'].forEach(type => {
-    uploadedImages[type].forEach(file => {
+    uploadedImages[type].filter(Boolean).forEach(file => {
       const img = document.createElement('img');
       img.src = URL.createObjectURL(file);
       container.appendChild(img);
@@ -651,7 +678,7 @@ async function uploadImagesToS3(customerId) {
     }
   }
 
-  uploadedImages.makeup.forEach((file, index) => {
+  uploadedImages.makeup.filter(Boolean).forEach((file, index) => {
     filesToUpload.push({
       file, category: 'reference', type: 'makeup',
       filename: `${String(index + 1).padStart(3, '0')}.jpg`,
@@ -660,7 +687,7 @@ async function uploadImagesToS3(customerId) {
     totalSizeBytes += file.size;
   });
 
-  uploadedImages.fashion.forEach((file, index) => {
+  uploadedImages.fashion.filter(Boolean).forEach((file, index) => {
     filesToUpload.push({
       file, category: 'reference', type: 'fashion',
       filename: `${String(index + 1).padStart(3, '0')}.jpg`,

@@ -725,6 +725,70 @@ textarea {
   color: white;
 }
 
+/* Reference upload grid (2-slot clickable boxes) */
+.ref-upload-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.ref-upload-box {
+  position: relative;
+  aspect-ratio: 3/4;
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.ref-upload-box:hover {
+  border-color: var(--accent);
+  background: var(--warm);
+}
+.ref-upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--text-dim);
+}
+.ref-upload-preview {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+.ref-upload-preview.active {
+  display: block;
+}
+.ref-upload-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ref-upload-preview .ref-remove-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.ref-upload-box:hover .ref-remove-btn {
+  opacity: 1;
+}
+
 /* Image remove button */
 .remove-image {
   position: absolute;
