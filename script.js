@@ -633,7 +633,7 @@ async function submitData() {
     const customerId = customerResponse.customerId;
 
     // 2. Upload images to S3
-    const uploadResult = await uploadImagesToS3(customerId);
+    const uploadResult = await uploadImagesToGCS(customerId);
 
     // 3. Update customer with photo keys
     await updateCustomerPhotos(customerId, uploadResult);
@@ -686,7 +686,7 @@ async function createCustomerRecord(formData) {
 }
 
 // ========== S3 UPLOAD ==========
-async function uploadImagesToS3(customerId) {
+async function uploadImagesToGCS(customerId) {
   const filesToUpload = [];
   let totalSizeBytes = 0;
 
@@ -772,7 +772,7 @@ async function uploadImagesToS3(customerId) {
       headers: { 'Content-Type': fileInfo.contentType },
       body: fileInfo.file
     });
-    return { category: fileInfo.category, type: fileInfo.type, s3Key: presigned.s3Key };
+    return { category: fileInfo.category, type: fileInfo.type, gcsKey: presigned.gcsKey };
   });
 
   const uploadResults = await Promise.all(uploadPromises);
@@ -785,9 +785,9 @@ async function uploadImagesToS3(customerId) {
 
   uploadResults.forEach(result => {
     if (result.category === 'reference') {
-      customerPhotos.reference[result.type].push(result.s3Key);
+      customerPhotos.reference[result.type].push(result.gcsKey);
     } else {
-      customerPhotos[result.category][result.type] = result.s3Key;
+      customerPhotos[result.category][result.type] = result.gcsKey;
     }
   });
 
