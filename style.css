@@ -1144,9 +1144,8 @@ textarea {
 }
 
 .guide-placeholder {
-  width: 100%;
-  max-width: 200px;
-  aspect-ratio: 3/4;
+  width: 200px;
+  height: 267px;
   margin: 0 auto 10px;
   background: var(--bg);
   border: 2px solid var(--accent);
