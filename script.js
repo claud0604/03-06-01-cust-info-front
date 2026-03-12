@@ -47,12 +47,10 @@ document.addEventListener('click', (e) => {
 // ========== GLOBAL VARIABLES ==========
 let uploadedImages = {
   faceFront: null,
-  face45: null,
   faceSide: null,
   faceVideo: null,
   makeup: [],
   bodyFront: null,
-  body45: null,
   bodySide: null,
   bodyVideo: null,
   fashion: []
@@ -315,7 +313,7 @@ function updateFaceThumbnails() {
   summary.style.display = 'flex';
   thumbnailsContainer.innerHTML = '';
 
-  ['faceFront', 'face45', 'faceSide'].forEach(type => {
+  ['faceFront', 'faceSide'].forEach(type => {
     if (uploadedImages[type]) {
       const thumbDiv = document.createElement('div');
       thumbDiv.className = 'thumbnail-item';
@@ -355,7 +353,7 @@ function updateBodyThumbnails() {
   summary.style.display = 'flex';
   thumbnailsContainer.innerHTML = '';
 
-  ['bodyFront', 'body45', 'bodySide'].forEach(type => {
+  ['bodyFront', 'bodySide'].forEach(type => {
     if (uploadedImages[type]) {
       const thumbDiv = document.createElement('div');
       thumbDiv.className = 'thumbnail-item';
@@ -554,7 +552,7 @@ function displayConfirmImages() {
   const container = document.getElementById('confirmImages');
   container.innerHTML = '';
 
-  ['faceFront', 'face45', 'faceSide', 'bodyFront', 'body45', 'bodySide'].forEach(type => {
+  ['faceFront', 'faceSide', 'bodyFront', 'bodySide'].forEach(type => {
     if (uploadedImages[type]) {
       const img = document.createElement('img');
       img.src = URL.createObjectURL(uploadedImages[type]);
@@ -692,14 +690,12 @@ async function uploadImagesToGCS(customerId) {
 
   const faceMapping = {
     faceFront: { category: 'face', type: 'front', ext: 'jpg' },
-    face45: { category: 'face', type: 'angle45', ext: 'jpg' },
     faceSide: { category: 'face', type: 'side', ext: 'jpg' },
     faceVideo: { category: 'face', type: 'video', ext: 'mp4' }
   };
 
   const bodyMapping = {
     bodyFront: { category: 'body', type: 'front', ext: 'jpg' },
-    body45: { category: 'body', type: 'angle45', ext: 'jpg' },
     bodySide: { category: 'body', type: 'side', ext: 'jpg' },
     bodyVideo: { category: 'body', type: 'video', ext: 'mp4' }
   };
@@ -740,8 +736,8 @@ async function uploadImagesToGCS(customerId) {
   if (filesToUpload.length === 0) {
     return {
       customerPhotos: {
-        face: { front: '', angle45: '', side: '', video: '' },
-        body: { front: '', angle45: '', side: '', video: '' },
+        face: { front: '', side: '', video: '' },
+        body: { front: '', side: '', video: '' },
         reference: { makeup: [], fashion: [] }
       },
       mediaMetadata: { totalSizeBytes: 0, uploadedAt: null, processingStatus: 'completed' }
@@ -778,8 +774,8 @@ async function uploadImagesToGCS(customerId) {
   const uploadResults = await Promise.all(uploadPromises);
 
   const customerPhotos = {
-    face: { front: '', angle45: '', side: '', video: '' },
-    body: { front: '', angle45: '', side: '', video: '' },
+    face: { front: '', side: '', video: '' },
+    body: { front: '', side: '', video: '' },
     reference: { makeup: [], fashion: [] }
   };
 

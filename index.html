@@ -199,14 +199,14 @@
           <!-- Face Photos -->
           <div class="upload-section upload-card" id="facePhotosCard">
             <div class="card-header-row">
-              <h4 class="upload-section-title" data-i18n="ci_face_photos_title">a. Face Photos (Front, 45°, Side)</h4>
+              <h4 class="upload-section-title" data-i18n="ci_face_photos_title">a. Face Photos (Front)</h4>
               <span class="badge badge-required" data-i18n="ci_badge_required">Required</span>
             </div>
             <div class="upload-area" id="faceUploadArea">
               <div class="upload-placeholder" id="facePlaceholder">
                 <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/><path d="M32 20V44M20 32H44" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                 <p class="upload-text" data-i18n="ci_upload_click">Click to upload photos</p>
-                <p class="upload-hint" data-i18n="ci_upload_face_hint">Add front, 45°, and side photos</p>
+                <p class="upload-hint" data-i18n="ci_upload_face_hint">Upload front face photo</p>
               </div>
               <div class="face-preview-summary" id="facePreviewSummary" style="display: none;">
                 <div class="preview-thumbnails" id="faceThumbnails"></div>
@@ -220,7 +220,7 @@
 
           <!-- Face Video -->
           <div class="upload-section">
-            <h4 class="upload-section-title" data-i18n="ci_face_video_title">b. Face Video (Optional)</h4>
+            <h4 class="upload-section-title" data-i18n="ci_face_video_title">b. Face Video (Recommended)</h4>
             <p class="help-text" data-i18n="ci_face_video_hint">A short video showing your face from various angles (max 50MB)</p>
             <div class="upload-area" id="faceVideoUploadArea" onclick="openFaceVideoGuide()">
               <div class="upload-placeholder">
@@ -239,7 +239,7 @@
 
           <!-- Makeup References -->
           <div class="upload-section">
-            <h4 class="upload-section-title" data-i18n="ci_makeup_title">c. Usual Makeup Style (Optional, max 2)</h4>
+            <h4 class="upload-section-title" data-i18n="ci_makeup_title">c. Usual Makeup Style (Required, max 2)</h4>
             <div class="upload-area" id="makeupUploadArea" onclick="openRefModal('makeup')">
               <div class="upload-placeholder" id="makeupPlaceholder">
                 <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/><path d="M32 20V44M20 32H44" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -265,14 +265,14 @@
           <!-- Body Photos -->
           <div class="upload-section upload-card" id="bodyPhotosCard">
             <div class="card-header-row">
-              <h4 class="upload-section-title" data-i18n="ci_body_photos_title">a. Body Photos (Front, 45°, Side)</h4>
+              <h4 class="upload-section-title" data-i18n="ci_body_photos_title">a. Body Photos (Front)</h4>
               <span class="badge badge-required" data-i18n="ci_badge_required">Required</span>
             </div>
             <div class="upload-area" id="bodyUploadArea">
               <div class="upload-placeholder" id="bodyPlaceholder">
                 <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/><path d="M32 20V44M20 32H44" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                 <p class="upload-text" data-i18n="ci_upload_click">Click to upload photos</p>
-                <p class="upload-hint" data-i18n="ci_upload_body_hint">Add front, 45°, and side photos</p>
+                <p class="upload-hint" data-i18n="ci_upload_body_hint">Upload front body photo</p>
               </div>
               <div class="body-preview-summary" id="bodyPreviewSummary" style="display: none;">
                 <div class="preview-thumbnails" id="bodyThumbnails"></div>
@@ -286,7 +286,7 @@
 
           <!-- Body Video -->
           <div class="upload-section">
-            <h4 class="upload-section-title" data-i18n="ci_body_video_title">b. Body Video (Optional)</h4>
+            <h4 class="upload-section-title" data-i18n="ci_body_video_title">b. Body Video (Recommended)</h4>
             <p class="help-text" data-i18n="ci_body_video_hint">A short video showing your body from various angles (max 50MB)</p>
             <div class="upload-area" id="bodyVideoUploadArea" onclick="openBodyVideoGuide()">
               <div class="upload-placeholder">
@@ -305,7 +305,7 @@
 
           <!-- Fashion References -->
           <div class="upload-section">
-            <h4 class="upload-section-title" data-i18n="ci_fashion_title">c. Usual Fashion Style (Optional, max 2)</h4>
+            <h4 class="upload-section-title" data-i18n="ci_fashion_title">c. Usual Fashion Style (Required, max 2)</h4>
             <div class="upload-area" id="fashionUploadArea" onclick="openRefModal('fashion')">
               <div class="upload-placeholder" id="fashionPlaceholder">
                 <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/><path d="M32 20V44M20 32H44" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -451,14 +451,7 @@
           <p data-i18n="ci_guide_front_desc">Look straight ahead,<br>show your full face</p>
         </div>
         <div class="guide-image-item">
-          <h4 data-i18n="ci_guide_45">2. 45°</h4>
-          <div class="guide-placeholder">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="28" cy="20" r="12" stroke="currentColor" stroke-width="2"/><path d="M8 56c0-11 8.95-20 20-20s20 9 20 20" stroke="currentColor" stroke-width="2"/></svg>
-          </div>
-          <p data-i18n="ci_guide_45_desc">Turn 45 degrees,<br>show your side profile</p>
-        </div>
-        <div class="guide-image-item">
-          <h4 data-i18n="ci_guide_side">3. Side</h4>
+          <h4 data-i18n="ci_guide_side">2. Side</h4>
           <div class="guide-placeholder">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="20" rx="8" ry="12" stroke="currentColor" stroke-width="2"/><path d="M16 56c0-11 7.16-20 16-20s16 9 16 20" stroke="currentColor" stroke-width="2"/></svg>
           </div>
@@ -523,22 +516,8 @@
         </div>
         <div class="photo-upload-item">
           <div class="photo-upload-header">
-            <h4 class="photo-label">45°</h4>
-            <span class="badge badge-optional" data-i18n="ci_badge_optional">Optional</span>
-          </div>
-          <div class="photo-upload-box" id="face45UploadBox" onclick="document.getElementById('face45Image').click()">
-            <input type="file" id="face45Image" accept="image/*" style="display: none;" onchange="handleModalImageUpload(this, 'face45')">
-            <div class="photo-placeholder" id="face45Placeholder">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/><path d="M24 14V34M14 24H34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-              <p class="photo-placeholder-text" data-i18n="ci_label_45_photo">45° photo</p>
-            </div>
-            <div class="photo-preview" id="face45Preview"></div>
-          </div>
-        </div>
-        <div class="photo-upload-item">
-          <div class="photo-upload-header">
             <h4 class="photo-label" data-i18n="ci_label_side">Side</h4>
-            <span class="badge badge-optional" data-i18n="ci_badge_optional">Optional</span>
+            <span class="badge badge-recommended" data-i18n="ci_badge_recommended">Recommended</span>
           </div>
           <div class="photo-upload-box" id="faceSideUploadBox" onclick="document.getElementById('faceSideImage').click()">
             <input type="file" id="faceSideImage" accept="image/*" style="display: none;" onchange="handleModalImageUpload(this, 'faceSide')">
@@ -621,14 +600,7 @@
           <p data-i18n="ci_guide_body_front_desc">Look straight ahead,<br>show your full body</p>
         </div>
         <div class="guide-image-item">
-          <h4 data-i18n="ci_guide_45">2. 45°</h4>
-          <div class="guide-placeholder">
-            <svg width="64" height="80" viewBox="0 0 64 80" fill="none"><circle cx="28" cy="14" r="10" stroke="currentColor" stroke-width="2"/><path d="M16 30h24v25H16z" stroke="currentColor" stroke-width="2" rx="2"/><path d="M20 55v20M36 55v20" stroke="currentColor" stroke-width="2"/></svg>
-          </div>
-          <p data-i18n="ci_guide_body_45_desc">Turn 45 degrees,<br>show your body line</p>
-        </div>
-        <div class="guide-image-item">
-          <h4 data-i18n="ci_guide_side">3. Side</h4>
+          <h4 data-i18n="ci_guide_side">2. Side</h4>
           <div class="guide-placeholder">
             <svg width="64" height="80" viewBox="0 0 64 80" fill="none"><circle cx="32" cy="14" r="10" stroke="currentColor" stroke-width="2"/><path d="M26 30h12v25H26z" stroke="currentColor" stroke-width="2" rx="2"/><path d="M28 55v20M36 55v20" stroke="currentColor" stroke-width="2"/></svg>
           </div>
@@ -691,22 +663,8 @@
         </div>
         <div class="photo-upload-item">
           <div class="photo-upload-header">
-            <h4 class="photo-label">45°</h4>
-            <span class="badge badge-optional" data-i18n="ci_badge_optional">Optional</span>
-          </div>
-          <div class="photo-upload-box" id="body45UploadBox" onclick="document.getElementById('body45Image').click()">
-            <input type="file" id="body45Image" accept="image/*" style="display: none;" onchange="handleModalImageUpload(this, 'body45')">
-            <div class="photo-placeholder" id="body45Placeholder">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/><path d="M24 14V34M14 24H34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-              <p class="photo-placeholder-text" data-i18n="ci_label_45_photo">45° photo</p>
-            </div>
-            <div class="photo-preview" id="body45Preview"></div>
-          </div>
-        </div>
-        <div class="photo-upload-item">
-          <div class="photo-upload-header">
             <h4 class="photo-label" data-i18n="ci_label_side">Side</h4>
-            <span class="badge badge-optional" data-i18n="ci_badge_optional">Optional</span>
+            <span class="badge badge-recommended" data-i18n="ci_badge_recommended">Recommended</span>
           </div>
           <div class="photo-upload-box" id="bodySideUploadBox" onclick="document.getElementById('bodySideImage').click()">
             <input type="file" id="bodySideImage" accept="image/*" style="display: none;" onchange="handleModalImageUpload(this, 'bodySide')">

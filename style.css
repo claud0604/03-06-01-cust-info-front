@@ -532,6 +532,12 @@ textarea {
   border: 1px solid var(--border);
 }
 
+.badge-recommended {
+  background: #fff8e1;
+  color: #f57f17;
+  border: 1px solid #ffe082;
+}
+
 .upload-area {
   position: relative;
   cursor: pointer;

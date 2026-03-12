@@ -32,13 +32,11 @@ const CUSTOMER_SCHEMA = {
   customerPhotos: {
     face: {
       front: '',
-      angle45: '',
       side: '',
       video: ''
     },
     body: {
       front: '',
-      angle45: '',
       side: '',
       video: ''
     },
