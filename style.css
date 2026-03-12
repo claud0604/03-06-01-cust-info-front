@@ -1131,7 +1131,10 @@ textarea {
   margin: 0 20px 20px;
 }
 
-.guide-image-item { text-align: center; }
+.guide-image-item {
+  text-align: center;
+  flex: 0 0 200px;
+}
 
 .guide-image-item h4 {
   color: var(--accent);
